@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<typeAliases>
+		<typeAlias type="org.chaeys.dto.BoardDTO" alias="boardDTO"/>
+		<typeAlias type="org.chaeys.dto.WriteDTO" alias="writeDTO"/>
+		<typeAlias type="org.chaeys.dto.CommentDTO" alias="commentDTO"/>
+		<typeAlias type="org.chaeys.dto.LoginDTO" alias="loginDTO"/>
+		<typeAlias type="org.chaeys.dto.MemberDTO" alias="memberDTO"/>
+		<typeAlias type="org.chaeys.dto.GalleryDTO" alias="galleryDTO"/>
+		<typeAlias type="org.chaeys.dto.NoticeDTO" alias="notice"/>
+	</typeAliases>
+</configuration>

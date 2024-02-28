@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="notice">
+
+	<select id="noticeList" parameterType="Integer" resultType="notice">
+		SELECT nno, nread, nlike, ntitle,
+		if(
+			date_format(now(), '%Y-%m-%d') = date_format(ndate, '%Y-%m-%d'),
+			date_format(ndate, '%h:%i'),
+			date_format(ndate, '%m-%d')
+		) as ndate,
+		if(date_format(now(), '%Y-%m-%d') = date_format(ndate, '%Y-%m-%d'), 1, 0) as ndel
+		FROM notice
+		WHERE ndel=1
+		ORDER BY nno DESC
+		LIMIT #{startpageNo}, 10
+	</select>
+	
+	<select id="totalRecordCount" resultType="int">
+		SELECT COUNT(*) 
+		FROM notice
+		WHERE ndel=1
+	</select>
+	
+	<insert id="noticeWrite" parameterType="notice">
+		INSERT INTO notice (ntitle, ncontent)
+		VALUES (#{ntitle}, #{ncontent})
+	</insert>
+
+	<select id="noticeDetail" parameterType="Integer" resultType="notice">
+		SELECT nno, ntitle, ncontent, nread,
+		date_format(ndate, '%Y-%m-%d %h:%i') as ndate
+		FROM notice WHERE ndel='1' AND nno=#{nno}
+	</select>
+	
+	<update id="noticeDel" parameterType="Integer" >
+		UPDATE notice SET ndel=0
+		WHERE nno=#{no}
+	</update>
+	
+	<select id="totalPage" resultType="Integer">
+		SELECT COUNT(*) FROM notice WHERE ndel=1
+	</select>
+</mapper>
